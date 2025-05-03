@@ -1,32 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
 <body>
-    <p>Consumo de REST-API de Usuarios</p>
+    <header class="header">
+        <h1>Gestión de Usuarios</h1>
+    </header>
 
-    <div>
-        <label>Name</label>
-        <input type="text" id="name">
-    </div>
-    <div>
-        <label>Email</label>
-        <input type="text" id="email">
-    </div>
-    <div>
-        <label>Age</label>
-        <input type="text" id="age">
-    </div>
-    <div>
-        <label>Comments</label>
-        <input type="text" id="comments">
-    </div>
+    <main class="container">
+        <section class="form-section">
+            <h2>Formulario</h2>
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" id="id" readonly disabled placeholder="Auto-generado">
+            </div>
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" placeholder="Nombre completo">
+            </div>
+            <div class="form-group">
+                <label for="email">Correo</label>
+                <input type="email" id="email" placeholder="correo@ejemplo.com">
+            </div>
+            <div class="form-group">
+                <label for="age">Edad</label>
+                <input type="number" id="age" placeholder="Edad">
+            </div>
+            <div class="form-group">
+                <label for="comments">Comentarios</label>
+                <input type="text" id="comments" placeholder="Comentarios adicionales">
+            </div>
+            <div class="button-group">
+                <button onclick="postUser()">Crear</button>
+                <button onclick="putUser()">Guardar cambios</button>
+                <button onclick="clearForm()">Limpiar</button>
+                <button onclick="getUsers()">Actualizar Lista</button>
+            </div>
+        </section>
 
-    <button onclick="postUser()">POST user</button>
-    <button onclick="getUsers()">GET usuarios</button>
+        <section class="table-section">
+            <h2>Lista de Usuarios</h2>
+            <div id="notifications"></div>
+            <div id="resultado">
+                <p class="loading">Cargando usuarios...</p>
+            </div>
+        </section>
+    </main>
 
-    <div id="resultado"></div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="callrestapi.js"></script>
+    <script>
+        function clearForm() {
+            $('#id').val('');
+            $('#name').val('');
+            $('#email').val('');
+            $('#age').val('');
+            $('#comments').val('');
+        }
+
+        $(document).ready(function () {
+            getUsers();
+        });
+    </script>
 </body>
 </html>
 
